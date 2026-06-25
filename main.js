@@ -1,0 +1,22 @@
+import { canvas, ctx } from "./src/ctx.js";
+
+class Game {
+  constructor() {}
+  Update(dt, time) {}
+}
+
+let APP = undefined;
+
+window.addEventListener("DOMContentLoaded", () => {
+  APP = new Game();
+});
+
+let prevT = window.performance.now();
+function gameloop(time) {
+  const dt = (time - prevT) * 0.001;
+  prevT = time;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  APP.Update(dt, time);
+  window.requestAnimationFrame(gameloop);
+}
+window.requestAnimationFrame(gameloop);
