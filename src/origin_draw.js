@@ -1,5 +1,6 @@
 import { Component } from "./component.js";
 import { ctx, canvas } from "./ctx.js";
+import { Vector } from "./vector.js";
 
 export class OriginDraw extends Component {
   static classname = "OriginDraw";
@@ -7,7 +8,7 @@ export class OriginDraw extends Component {
   constructor(params) {
     super();
     this.params = { ...params };
-    this.octrlpos = undefined;
+    this.tippos = undefined;
   }
   get NAME() {
     return OriginDraw.classname;
@@ -19,63 +20,75 @@ export class OriginDraw extends Component {
     return this.#radius;
   }
   InitComponent() {
-    const ctrl = this.owner.GetComponent("OriginController");
-    this.octrlpos = ctrl.position;
+    this.owner.RegisterHandler("origin.line", (msg) => this.OnLineDraw(msg));
+    this.tippos = new Vector(0, 0);
   }
-
+  OnLineDraw(msg) {
+    this.tippos.VECTOR = { ...msg.pos };
+  }
   Update(dt, time) {
+    const ctrl = this.owner.GetComponent("OriginController");
+    if (ctrl.active) {
+      ctx.beginPath();
+      ctx.moveTo(ctrl.position.VECTOR.x, ctrl.position.VECTOR.y);
+      ctx.lineTo(this.tippos.VECTOR.x, this.tippos.VECTOR.y);
+      ctx.strokeStyle = this.params.color;
+      ctx.stroke();
+    }
     ctx.beginPath();
     ctx.arc(
-      this.octrlpos.VECTOR.x,
-      this.octrlpos.VECTOR.y,
+      ctrl.position.VECTOR.x,
+      ctrl.position.VECTOR.y,
       this.RADIUS,
       0,
       Math.PI * 2,
       false,
     );
     ctx.strokeStyle = this.params.color;
+    ctx.fillStyle = `rgb(211, 211, 211)`;
+    ctx.fill();
     ctx.stroke();
     ctx.closePath();
     ctx.beginPath();
     ctx.moveTo(
-      this.octrlpos.VECTOR.x - this.RADIUS,
-      this.octrlpos.VECTOR.y + this.RADIUS,
+      ctrl.position.VECTOR.x - this.RADIUS,
+      ctrl.position.VECTOR.y + this.RADIUS,
     );
     ctx.lineTo(
-      this.octrlpos.VECTOR.x - 10,
-      this.octrlpos.VECTOR.y - this.RADIUS,
+      ctrl.position.VECTOR.x - 10,
+      ctrl.position.VECTOR.y - this.RADIUS,
     );
     ctx.moveTo(
-      this.octrlpos.VECTOR.x - 10,
-      this.octrlpos.VECTOR.y - this.RADIUS,
+      ctrl.position.VECTOR.x - 10,
+      ctrl.position.VECTOR.y - this.RADIUS,
     );
     ctx.lineTo(
-      this.octrlpos.VECTOR.x - 10,
-      this.octrlpos.VECTOR.y + this.RADIUS,
+      ctrl.position.VECTOR.x - 10,
+      ctrl.position.VECTOR.y + this.RADIUS,
     );
     ctx.moveTo(
-      this.octrlpos.VECTOR.x - 10,
-      this.octrlpos.VECTOR.y + this.RADIUS,
+      ctrl.position.VECTOR.x - 10,
+      ctrl.position.VECTOR.y + this.RADIUS,
     );
     ctx.lineTo(
-      this.octrlpos.VECTOR.x + 25,
-      this.octrlpos.VECTOR.y - this.RADIUS,
+      ctrl.position.VECTOR.x + 25,
+      ctrl.position.VECTOR.y - this.RADIUS,
     );
     ctx.moveTo(
-      this.octrlpos.VECTOR.x + 25,
-      this.octrlpos.VECTOR.y - this.RADIUS,
+      ctrl.position.VECTOR.x + 25,
+      ctrl.position.VECTOR.y - this.RADIUS,
     );
     ctx.lineTo(
-      this.octrlpos.VECTOR.x + 25,
-      this.octrlpos.VECTOR.y + this.RADIUS,
+      ctrl.position.VECTOR.x + 25,
+      ctrl.position.VECTOR.y + this.RADIUS,
     );
     ctx.moveTo(
-      this.octrlpos.VECTOR.x + 25,
-      this.octrlpos.VECTOR.y + this.RADIUS,
+      ctrl.position.VECTOR.x + 25,
+      ctrl.position.VECTOR.y + this.RADIUS,
     );
     ctx.lineTo(
-      this.octrlpos.VECTOR.x + 65,
-      this.octrlpos.VECTOR.y - this.RADIUS,
+      ctrl.position.VECTOR.x + 65,
+      ctrl.position.VECTOR.y - this.RADIUS,
     );
     ctx.strokeStyle = this.params.color;
     ctx.stroke();
