@@ -10,4 +10,7 @@ export class Vector {
   get VECTOR() {
     return { x: this.x, y: this.y };
   }
+  get LENGTH() {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
 }
