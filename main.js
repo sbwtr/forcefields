@@ -15,8 +15,7 @@ class Game {
     const red = new Entity();
     this.entitymanager.Add("red", red);
     red.AddComponent(new OriginController());
-    red.AddComponent(new OriginDraw());
-    console.log(red.components);
+    red.AddComponent(new OriginDraw({ color: `rgb(206, 58, 21)` }));
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);

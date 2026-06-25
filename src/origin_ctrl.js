@@ -10,7 +10,6 @@ export class OriginController extends Component {
     window.addEventListener("mousemove", (e) => this.OnMove(e));
     window.addEventListener("click", (e) => this.OnClick(e));
   }
-
   get NAME() {
     return OriginController.classname;
   }

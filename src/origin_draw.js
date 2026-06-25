@@ -4,8 +4,9 @@ import { ctx, canvas } from "./ctx.js";
 export class OriginDraw extends Component {
   static classname = "OriginDraw";
   #radius = 50;
-  constructor() {
+  constructor(params) {
     super();
+    this.params = { ...params };
     this.octrlpos = undefined;
   }
   get NAME() {
@@ -32,7 +33,51 @@ export class OriginDraw extends Component {
       Math.PI * 2,
       false,
     );
-    ctx.strokeStyle = `rgb(206, 58, 21)`;
+    ctx.strokeStyle = this.params.color;
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(
+      this.octrlpos.VECTOR.x - this.RADIUS,
+      this.octrlpos.VECTOR.y + this.RADIUS,
+    );
+    ctx.lineTo(
+      this.octrlpos.VECTOR.x - 10,
+      this.octrlpos.VECTOR.y - this.RADIUS,
+    );
+    ctx.moveTo(
+      this.octrlpos.VECTOR.x - 10,
+      this.octrlpos.VECTOR.y - this.RADIUS,
+    );
+    ctx.lineTo(
+      this.octrlpos.VECTOR.x - 10,
+      this.octrlpos.VECTOR.y + this.RADIUS,
+    );
+    ctx.moveTo(
+      this.octrlpos.VECTOR.x - 10,
+      this.octrlpos.VECTOR.y + this.RADIUS,
+    );
+    ctx.lineTo(
+      this.octrlpos.VECTOR.x + 25,
+      this.octrlpos.VECTOR.y - this.RADIUS,
+    );
+    ctx.moveTo(
+      this.octrlpos.VECTOR.x + 25,
+      this.octrlpos.VECTOR.y - this.RADIUS,
+    );
+    ctx.lineTo(
+      this.octrlpos.VECTOR.x + 25,
+      this.octrlpos.VECTOR.y + this.RADIUS,
+    );
+    ctx.moveTo(
+      this.octrlpos.VECTOR.x + 25,
+      this.octrlpos.VECTOR.y + this.RADIUS,
+    );
+    ctx.lineTo(
+      this.octrlpos.VECTOR.x + 65,
+      this.octrlpos.VECTOR.y - this.RADIUS,
+    );
+    ctx.strokeStyle = this.params.color;
     ctx.stroke();
   }
 }
