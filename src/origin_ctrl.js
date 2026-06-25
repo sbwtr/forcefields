@@ -1,5 +1,5 @@
-import { Component } from "../component.js/";
-import { Vector } from "../vector.js";
+import { Component } from "./component.js";
+import { Vector } from "./vector.js";
 
 export class OriginController extends Component {
   static classname = "OriginController";
@@ -9,6 +9,10 @@ export class OriginController extends Component {
     this.active = false;
     window.addEventListener("mousemove", (e) => this.OnMove(e));
     window.addEventListener("click", (e) => this.OnClick(e));
+  }
+
+  get NAME() {
+    return OriginController.classname;
   }
   InitComponent() {
     this.position.VECTOR = { x: 300, y: 300 };

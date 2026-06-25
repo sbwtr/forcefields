@@ -4,7 +4,7 @@ export class Component {
     this.owner = undefined;
   }
   get NAME() {
-    throw new Error("should be implemented in derived");
+    throw new Error("must be implemented in drived classes");
   }
   set OWNER(entity) {
     this.owner = entity;

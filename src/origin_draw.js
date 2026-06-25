@@ -1,5 +1,5 @@
-import { Component } from "../component.js";
-import { ctx, canvas } from "../ctx.js";
+import { Component } from "./component.js";
+import { ctx, canvas } from "./ctx.js";
 
 export class OriginDraw extends Component {
   static classname = "OriginDraw";
