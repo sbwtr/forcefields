@@ -14,7 +14,7 @@ export class EntityManager {
   }
   Update(dt, time) {
     for (const entity in this.entityMap) {
-      entity.Update(dt, time);
+      this.entityMap[entity].Update(dt, time);
     }
   }
 }

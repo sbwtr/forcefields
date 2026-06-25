@@ -12,9 +12,5 @@ export class Component {
 
   InitComponent() {}
 
-  RegisterHandler(name, handler) {
-    this.owner.RegisterHandler(name, handler);
-  }
-
   Update(dt, time) {}
 }

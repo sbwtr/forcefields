@@ -16,7 +16,7 @@ export class Entity {
     return this.name;
   }
   set MANAGER(manager) {
-    this.manger = manager;
+    this.manager = manager;
   }
 
   RegisterHandler(name, handler) {
@@ -30,7 +30,7 @@ export class Entity {
     if (!(msg.topic in this.handlers)) {
       return;
     }
-    for (const handler in this.handlers[msg.topic]) {
+    for (const handler of this.handlers[msg.topic]) {
       handler(msg);
     }
   }
@@ -52,7 +52,7 @@ export class Entity {
   }
   Update(dt, time) {
     for (const comp in this.components) {
-      comp.Update(dt, time);
+      this.components[comp].Update(dt, time);
     }
   }
 }
