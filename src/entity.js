@@ -47,9 +47,7 @@ export class Entity {
   FindEntity(name) {
     this.manager.Get(name);
   }
-  SetPosition(position) {
-    this.position.VECTOR = position;
-  }
+
   Update(dt, time) {
     for (const comp in this.components) {
       this.components[comp].Update(dt, time);
