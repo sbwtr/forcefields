@@ -1,6 +1,8 @@
 import { canvas, ctx } from "./src/ctx.js";
 import { EntityManager } from "./src/entityManager.js";
 import { Entity } from "./src/entity.js";
+import { OriginController } from "./src/red_comps/origin_ctrl.js";
+import { OriginDraw } from "./src/red_comps/origin_draw.js";
 
 class Game {
   constructor() {
@@ -12,6 +14,8 @@ class Game {
 
     const red = new Entity();
     this.entitymanager.Add("red", red);
+    red.AddComponent(new OriginController());
+    red.AddComponent(new OriginDraw());
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);

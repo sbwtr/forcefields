@@ -1,4 +1,4 @@
-import { Component } from "..component.js/";
+import { Component } from "../component.js/";
 import { Vector } from "../vector.js";
 
 export class OriginController extends Component {
@@ -8,20 +8,25 @@ export class OriginController extends Component {
     this.position = new Vector(0, 0);
     this.active = false;
     window.addEventListener("mousemove", (e) => this.OnMove(e));
+    window.addEventListener("click", (e) => this.OnClick(e));
   }
   InitComponent() {
     this.position.VECTOR = { x: 300, y: 300 };
   }
+
   OnMove(event) {
     const draw = this.owner.GetComponent("OriginDraw");
-    this.active = false;
     if (
       event.offsetX > this.position.VECTOR.x &&
-      event.offsetX < this.position.VECTOR.x + draw.WIDTH &&
+      event.offsetX < this.position.VECTOR.x + draw.RADIUS &&
       event.offsetY > this.position.VECTOR.y &&
-      event.offsetY < this.position.VECTOR.y + draw.HEIGHT
+      event.offsetY < this.position.VECTOR.y + draw.RADIUS
     ) {
       this.active = true;
     }
+  }
+  OnClick(event) {
+    this.owner.Broadcast({ topic: "field.spawn", value: true });
+    this.active = false;
   }
 }
