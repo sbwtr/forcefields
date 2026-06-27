@@ -6,7 +6,6 @@ export class OriginController extends Component {
   constructor() {
     super();
     this.position = undefined;
-    this.active = false;
     window.addEventListener("mousemove", (e) => this.OnMove(e));
     window.addEventListener("click", (e) => this.OnClick(e));
   }
@@ -15,21 +14,21 @@ export class OriginController extends Component {
   }
   InitComponent() {
     this.position = new Vector(300, 300);
+    this.owner.SetParam("o.position", this.position);
   }
 
   OnMove(event) {
-    const draw = this.owner.GetComponent("OriginDraw");
     this.owner.Broadcast({
       topic: "origin.line",
       pos: { x: event.offsetX, y: event.offsetY },
     });
     if (
       event.offsetX > this.position.VECTOR.x &&
-      event.offsetX < this.position.VECTOR.x + draw.RADIUS &&
+      event.offsetX < this.position.VECTOR.x + this.owner.params["o.radius"] &&
       event.offsetY > this.position.VECTOR.y &&
-      event.offsetY < this.position.VECTOR.y + draw.RADIUS
+      event.offsetY < this.position.VECTOR.y + this.owner.params["o.radius"]
     ) {
-      this.active = true;
+      this.owner.Broadcast({ topic: "origin.active", value: true });
     }
   }
   OnClick(event) {
@@ -37,6 +36,6 @@ export class OriginController extends Component {
       topic: "field.spawn",
       pos: { x: event.offsetX, y: event.offsetY },
     });
-    this.active = false;
+    this.owner.Broadcast({ topic: "origin.active", value: false });
   }
 }

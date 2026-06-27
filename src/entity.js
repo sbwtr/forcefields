@@ -7,6 +7,7 @@ export class Entity {
     this.components = {};
     this.handlers = [];
     this.position = new Vector(0, 0);
+    this.params = {};
   }
 
   set NAME(name) {
@@ -17,6 +18,10 @@ export class Entity {
   }
   set MANAGER(manager) {
     this.manager = manager;
+  }
+
+  SetParam(name, data) {
+    this.params[name] = data;
   }
 
   RegisterHandler(name, handler) {
