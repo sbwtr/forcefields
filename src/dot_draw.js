@@ -23,7 +23,7 @@ export class DotDraw extends Component {
       Math.PI * 2,
       false,
     );
-    ctx.fillStyle = this.params.color;
+    ctx.fillStyle = `rgb(${this.params.color})`;
     ctx.fill();
   }
 }

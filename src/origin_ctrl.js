@@ -2,9 +2,9 @@ import { Component } from "./component.js";
 
 export class OriginController extends Component {
   static classname = "OriginController";
-  constructor() {
+  constructor(params) {
     super();
-    this.position = undefined;
+    this.position = { ...params };
     this.active = false;
     window.addEventListener("mousemove", (e) => this.OnMove(e));
     window.addEventListener("click", (e) => this.OnClick(e));
@@ -13,7 +13,6 @@ export class OriginController extends Component {
     return OriginController.classname;
   }
   InitComponent() {
-    this.position = { x: 300, y: 300 };
     this.owner.SetParam("o.position", this.position);
   }
 
@@ -33,13 +32,13 @@ export class OriginController extends Component {
     }
   }
   OnClick(event) {
-    this.owner.Broadcast({
+    /*   this.owner.Broadcast({
       topic: "field.spawn",
       pos: undefined,
       draw: false,
       radius: 5,
       alpha: 1,
-    });
+    }); */
     if (this.active) {
       this.owner.Broadcast({
         topic: "field.spawn",

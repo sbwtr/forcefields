@@ -36,13 +36,14 @@ export class OriginDraw extends Component {
   }
   Update(dt, time) {
     if (this.drawline) {
+      const origin = this.owner.GetComponent("OriginController");
       ctx.beginPath();
       ctx.moveTo(
         this.owner.GetParam("o.position").x,
         this.owner.GetParam("o.position").y,
       );
       ctx.lineTo(this.tippos.x, this.tippos.y);
-      ctx.strokeStyle = this.params.color;
+      ctx.strokeStyle = `rgb(${this.params.color})`;
       ctx.stroke();
     }
     ctx.beginPath();
@@ -54,7 +55,7 @@ export class OriginDraw extends Component {
       Math.PI * 2,
       false,
     );
-    ctx.strokeStyle = this.params.color;
+    ctx.strokeStyle = `rgb(${this.params.color})`;
     ctx.fillStyle = `rgb(211, 211, 211)`;
     ctx.fill();
     ctx.stroke();
@@ -100,7 +101,7 @@ export class OriginDraw extends Component {
       this.owner.GetParam("o.position").x + 65,
       this.owner.GetParam("o.position").y - this.RADIUS,
     );
-    ctx.strokeStyle = this.params.color;
+    ctx.strokeStyle = `rgb(${this.params.color})`;
     ctx.stroke();
   }
 }
