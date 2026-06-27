@@ -5,6 +5,8 @@ import { OriginController } from "./src/origin_ctrl.js";
 import { OriginDraw } from "./src/origin_draw.js";
 import { DotController } from "./src/dot_ctrl.js";
 import { DotDraw } from "./src/dot_draw.js";
+import { FieldController } from "./src/field_ctrl.js";
+import { FieldDraw } from "./src/field_draw.js";
 
 class Game {
   constructor() {
@@ -24,6 +26,10 @@ class Game {
     red.AddComponent(new OriginDraw(redparams));
     red.AddComponent(new DotController());
     red.AddComponent(new DotDraw(redparams));
+    red.AddComponent(new FieldController());
+    red.AddComponent(new FieldDraw(redparams));
+    red.AddComponent(new FieldController());
+    red.AddComponent(new FieldDraw(redparams));
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);

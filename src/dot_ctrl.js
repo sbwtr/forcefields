@@ -23,7 +23,8 @@ export class DotController extends Component {
     this.owner.RegisterHandler("dot.collide", (msg) => this.OnCollide(msg));
   }
   OnCollide(msg) {
-    this.collide = msg.value;
+    this.collide = true;
+    this.force = { ...msg.force };
   }
   Update(dt, time) {
     if (
@@ -41,6 +42,7 @@ export class DotController extends Component {
     if (this.collide) {
       this.velocity.x += this.force.x * dt;
       this.velocity.y += this.force.y * dt;
+      this.collide = false;
     }
     this.velocity.x *= 0.9995;
     this.velocity.y *= 0.9995;

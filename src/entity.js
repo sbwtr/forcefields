@@ -21,6 +21,7 @@ export class Entity {
     this.#params[name] = data;
   }
   GetParam(name) {
+    if (!(name in this.#params)) return;
     return this.#params[name];
   }
   RegisterHandler(name, handler) {
