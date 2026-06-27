@@ -14,10 +14,14 @@ export class DotController extends Component {
     return DotController.classname;
   }
   InitComponent() {
-    const x = Math.random() * 20 - 10 + canvas.width / 2;
-    const y = Math.random() * 20 - 10 + canvas.height / 2;
+    const x = canvas.width / 2 + (Math.random() * 2 - 1) * 20;
+    const y = canvas.height / 2 + (Math.random() * 2 - 1) * 20;
+    console.log(x, y);
     this.force = { x: 0, y: 0 };
-    this.velocity = { x: x * 0.1, y: y * 0.1 };
+    this.velocity = {
+      x: (Math.random() * 2 - 1) * 80,
+      y: (Math.random() * 2 - 1) * 80,
+    };
     this.position = { x: x, y: y };
     this.owner.SetParam("d.position", this.position);
     this.owner.RegisterHandler("dot.collide", (msg) => this.OnCollide(msg));

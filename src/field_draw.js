@@ -41,6 +41,5 @@ export class FieldDraw extends Component {
         this.alpha = 1;
       }
     }
-    //update radius
   }
 }
