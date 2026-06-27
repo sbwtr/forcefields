@@ -48,8 +48,8 @@ export class DotController extends Component {
       this.velocity.y += this.force.y * dt;
       this.collide = false;
     }
-    this.velocity.x *= 0.9995;
-    this.velocity.y *= 0.9995;
+    this.velocity.x *= 0.998;
+    this.velocity.y *= 0.998;
     this.position.x += this.velocity.x * dt;
     this.position.y += this.velocity.y * dt;
 

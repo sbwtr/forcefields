@@ -7,26 +7,29 @@ export class FieldDraw extends Component {
     super();
     this.params = { ...params };
     this.draw = false;
-    this.alpha = 1;
+    this.alpha = 0;
+    this.position = undefined;
   }
   get NAME() {
     return FieldDraw.classname;
   }
   InitComponent() {
     this.owner.SetParam("f.radius", this.params.radius);
-    this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldDraw(msg));
+    this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldSpawn(msg));
   }
-  OnFieldDraw(msg) {
-    this.draw = true;
-    this.params.radius = 5;
-    this.alpha = 1;
+  OnFieldSpawn(msg) {
+    console.log(msg);
+    this.draw = msg.draw;
+    this.params.radius = msg.radius;
+    this.alpha = msg.alpha;
+    this.position = { ...msg.pos };
   }
   Update(dt, time) {
     if (this.draw) {
       ctx.beginPath();
       ctx.arc(
-        this.owner.GetParam("f.position").x,
-        this.owner.GetParam("f.position").y,
+        this.position.x,
+        this.position.y,
         (this.params.radius += dt * 20),
         0,
         Math.PI * 2,
@@ -37,9 +40,13 @@ export class FieldDraw extends Component {
       ctx.fillStyle = `rgba(206,58,21,${this.alpha})`;
       ctx.fill();
       if (this.alpha < 0) {
-        this.draw = false;
-        this.params.radius = 5;
-        this.alpha = 1;
+        this.owner.Broadcast({
+          topic: "field.spawn",
+          pos: undefined,
+          draw: false,
+          radius: 5,
+          alpha: 1,
+        });
       }
     }
   }

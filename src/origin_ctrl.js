@@ -33,10 +33,20 @@ export class OriginController extends Component {
     }
   }
   OnClick(event) {
+    this.owner.Broadcast({
+      topic: "field.spawn",
+      pos: undefined,
+      draw: false,
+      radius: 5,
+      alpha: 1,
+    });
     if (this.active) {
       this.owner.Broadcast({
         topic: "field.spawn",
         pos: { x: event.offsetX, y: event.offsetY },
+        draw: true,
+        radius: 5,
+        alpha: 1,
       });
       this.active = false;
       this.owner.Broadcast({ topic: "origin.active", value: this.active });

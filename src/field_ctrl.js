@@ -11,30 +11,36 @@ export class FieldController extends Component {
   }
   InitComponent() {
     this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldSpawn(msg));
-    this.position = { x: 0, y: 0 };
   }
   OnFieldSpawn(msg) {
     this.position = { ...msg.pos };
-    this.owner.SetParam("f.position", this.position);
+    /*     this.owner.SetParam("f.position", this.position);
+     */
   }
+
   Update(dt, time) {
-    const dotposition = this.owner.GetParam("d.position");
-    const fieldradius = this.owner.GetParam("f.radius");
-    const maxX = this.position.x + fieldradius;
-    const maxY = this.position.y + fieldradius;
-    const minX = this.position.x - fieldradius;
-    const minY = this.position.y - fieldradius;
-    //const length = Math.sqrt(())
-    if (
-      dotposition.x < maxX &&
-      dotposition.y < maxY &&
-      dotposition.x > minX &&
-      dotposition.y > minY
-    ) {
-      this.owner.Broadcast({
-        topic: "dot.collide",
-        force: { x: -100, y: 100 },
-      });
+    if (this.position) {
+      const dot = this.owner.GetComponent("DotController");
+      const fieldradius = this.owner.GetComponent("FieldDraw");
+      const maxX = this.position.x + fieldradius.params.radius;
+      const maxY = this.position.y + fieldradius.params.radius;
+      const minX = this.position.x - fieldradius.params.radius;
+      const minY = this.position.y - fieldradius.params.radius;
+      if (
+        dot.position.x < maxX &&
+        dot.position.y < maxY &&
+        dot.position.x > minX &&
+        dot.position.y > minY
+      ) {
+        const dir = {
+          x: (dot.position.x - this.position.x) * fieldradius.params.radius,
+          y: (dot.position.y - this.position.y) * fieldradius.params.radius,
+        };
+        this.owner.Broadcast({
+          topic: "dot.collide",
+          force: dir,
+        });
+      }
     }
   }
 }
