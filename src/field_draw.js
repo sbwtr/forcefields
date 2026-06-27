@@ -32,6 +32,7 @@ export class FieldDraw extends Component {
         Math.PI * 2,
         false,
       );
+      this.owner.SetParam("f.radius", this.params.radius);
       this.alpha -= dt * 0.1;
       ctx.fillStyle = `rgba(206,58,21,${this.alpha})`;
       ctx.fill();
