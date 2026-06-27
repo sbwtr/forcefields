@@ -13,4 +13,14 @@ export class Vector {
   get LENGTH() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
+  Add(other) {
+    this.x += other.x;
+    this.y += other.y;
+    return this;
+  }
+  MultScalar(value) {
+    this.x *= value;
+    this.y *= value;
+    return this;
+  }
 }

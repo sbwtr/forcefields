@@ -1,5 +1,4 @@
 import { Component } from "./component.js";
-import { Vector } from "./vector.js";
 
 export class OriginController extends Component {
   static classname = "OriginController";
@@ -13,7 +12,7 @@ export class OriginController extends Component {
     return OriginController.classname;
   }
   InitComponent() {
-    this.position = new Vector(300, 300);
+    this.position = { x: 300, y: 300 };
     this.owner.SetParam("o.position", this.position);
   }
 
@@ -23,10 +22,10 @@ export class OriginController extends Component {
       pos: { x: event.offsetX, y: event.offsetY },
     });
     if (
-      event.offsetX > this.position.VECTOR.x &&
-      event.offsetX < this.position.VECTOR.x + this.owner.params["o.radius"] &&
-      event.offsetY > this.position.VECTOR.y &&
-      event.offsetY < this.position.VECTOR.y + this.owner.params["o.radius"]
+      event.offsetX > this.position.x &&
+      event.offsetX < this.position.x + this.owner.GetParam("o.radius") &&
+      event.offsetY > this.position.y &&
+      event.offsetY < this.position.y + this.owner.GetParam("o.radius")
     ) {
       this.owner.Broadcast({ topic: "origin.active", value: true });
     }

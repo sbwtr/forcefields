@@ -1,13 +1,10 @@
-import { Vector } from "./vector.js";
-
 export class Entity {
+  #params = {};
   constructor() {
     this.name = undefined;
     this.manager = undefined;
     this.components = {};
     this.handlers = [];
-    this.position = new Vector(0, 0);
-    this.params = {};
   }
 
   set NAME(name) {
@@ -21,9 +18,11 @@ export class Entity {
   }
 
   SetParam(name, data) {
-    this.params[name] = data;
+    this.#params[name] = data;
   }
-
+  GetParam(name) {
+    return this.#params[name];
+  }
   RegisterHandler(name, handler) {
     if (!(name in this.handlers)) {
       this.handlers[name] = [];

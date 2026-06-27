@@ -1,6 +1,5 @@
 import { Component } from "./component.js";
 import { ctx, canvas } from "./ctx.js";
-import { Vector } from "./vector.js";
 
 export class OriginDraw extends Component {
   static classname = "OriginDraw";
@@ -25,11 +24,11 @@ export class OriginDraw extends Component {
     this.owner.RegisterHandler("origin.active", (msg) =>
       this.OnOriginActive(msg),
     );
-    this.tippos = new Vector(0, 0);
+    this.tippos = { x: 0, y: 0 };
     this.owner.SetParam("o.radius", this.#radius);
   }
   OnLineDraw(msg) {
-    this.tippos.VECTOR = { ...msg.pos };
+    this.tippos = { ...msg.pos };
   }
 
   OnOriginActive(msg) {
@@ -39,17 +38,17 @@ export class OriginDraw extends Component {
     if (this.drawline) {
       ctx.beginPath();
       ctx.moveTo(
-        this.owner.params["o.position"].VECTOR.x,
-        this.owner.params["o.position"].VECTOR.y,
+        this.owner.GetParam("o.position").x,
+        this.owner.GetParam("o.position").y,
       );
-      ctx.lineTo(this.tippos.VECTOR.x, this.tippos.VECTOR.y);
+      ctx.lineTo(this.tippos.x, this.tippos.y);
       ctx.strokeStyle = this.params.color;
       ctx.stroke();
     }
     ctx.beginPath();
     ctx.arc(
-      this.owner.params["o.position"].VECTOR.x,
-      this.owner.params["o.position"].VECTOR.y,
+      this.owner.GetParam("o.position").x,
+      this.owner.GetParam("o.position").y,
       this.RADIUS,
       0,
       Math.PI * 2,
@@ -62,44 +61,44 @@ export class OriginDraw extends Component {
     ctx.closePath();
     ctx.beginPath();
     ctx.moveTo(
-      this.owner.params["o.position"].VECTOR.x - this.RADIUS,
-      this.owner.params["o.position"].VECTOR.y + this.RADIUS,
+      this.owner.GetParam("o.position").x - this.RADIUS,
+      this.owner.GetParam("o.position").y + this.RADIUS,
     );
     ctx.lineTo(
-      this.owner.params["o.position"].VECTOR.x - 10,
-      this.owner.params["o.position"].VECTOR.y - this.RADIUS,
+      this.owner.GetParam("o.position").x - 10,
+      this.owner.GetParam("o.position").y - this.RADIUS,
     );
     ctx.moveTo(
-      this.owner.params["o.position"].VECTOR.x - 10,
-      this.owner.params["o.position"].VECTOR.y - this.RADIUS,
+      this.owner.GetParam("o.position").x - 10,
+      this.owner.GetParam("o.position").y - this.RADIUS,
     );
     ctx.lineTo(
-      this.owner.params["o.position"].VECTOR.x - 10,
-      this.owner.params["o.position"].VECTOR.y + this.RADIUS,
+      this.owner.GetParam("o.position").x - 10,
+      this.owner.GetParam("o.position").y + this.RADIUS,
     );
     ctx.moveTo(
-      this.owner.params["o.position"].VECTOR.x - 10,
-      this.owner.params["o.position"].VECTOR.y + this.RADIUS,
+      this.owner.GetParam("o.position").x - 10,
+      this.owner.GetParam("o.position").y + this.RADIUS,
     );
     ctx.lineTo(
-      this.owner.params["o.position"].VECTOR.x + 25,
-      this.owner.params["o.position"].VECTOR.y - this.RADIUS,
+      this.owner.GetParam("o.position").x + 25,
+      this.owner.GetParam("o.position").y - this.RADIUS,
     );
     ctx.moveTo(
-      this.owner.params["o.position"].VECTOR.x + 25,
-      this.owner.params["o.position"].VECTOR.y - this.RADIUS,
+      this.owner.GetParam("o.position").x + 25,
+      this.owner.GetParam("o.position").y - this.RADIUS,
     );
     ctx.lineTo(
-      this.owner.params["o.position"].VECTOR.x + 25,
-      this.owner.params["o.position"].VECTOR.y + this.RADIUS,
+      this.owner.GetParam("o.position").x + 25,
+      this.owner.GetParam("o.position").y + this.RADIUS,
     );
     ctx.moveTo(
-      this.owner.params["o.position"].VECTOR.x + 25,
-      this.owner.params["o.position"].VECTOR.y + this.RADIUS,
+      this.owner.GetParam("o.position").x + 25,
+      this.owner.GetParam("o.position").y + this.RADIUS,
     );
     ctx.lineTo(
-      this.owner.params["o.position"].VECTOR.x + 65,
-      this.owner.params["o.position"].VECTOR.y - this.RADIUS,
+      this.owner.GetParam("o.position").x + 65,
+      this.owner.GetParam("o.position").y - this.RADIUS,
     );
     ctx.strokeStyle = this.params.color;
     ctx.stroke();

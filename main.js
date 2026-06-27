@@ -3,6 +3,8 @@ import { EntityManager } from "./src/entityManager.js";
 import { Entity } from "./src/entity.js";
 import { OriginController } from "./src/origin_ctrl.js";
 import { OriginDraw } from "./src/origin_draw.js";
+import { DotController } from "./src/dot_ctrl.js";
+import { DotDraw } from "./src/dot_draw.js";
 
 class Game {
   constructor() {
@@ -12,10 +14,16 @@ class Game {
   #init() {
     this.entitymanager = new EntityManager();
 
+    const redparams = {
+      color: `rgb(206, 58, 21)`,
+      radius: 5,
+    };
     const red = new Entity();
     this.entitymanager.Add("red", red);
     red.AddComponent(new OriginController());
-    red.AddComponent(new OriginDraw({ color: `rgb(206, 58, 21)` }));
+    red.AddComponent(new OriginDraw(redparams));
+    red.AddComponent(new DotController());
+    red.AddComponent(new DotDraw(redparams));
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);
