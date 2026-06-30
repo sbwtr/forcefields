@@ -8,6 +8,8 @@ import { DotDraw } from "./src/dot_draw.js";
 import { FieldController } from "./src/field_ctrl.js";
 import { FieldDraw } from "./src/field_draw.js";
 import { cells } from "./src/helpers.js";
+import { SocketController } from "./src/socket_ctrl.js";
+import { SocketDraw } from "./src/socket_draw.js";
 
 class Game {
   constructor() {
@@ -35,6 +37,8 @@ class Game {
     red.AddComponent(new FieldDraw(redparams));
     red.AddComponent(new FieldController());
     red.AddComponent(new FieldDraw(redparams));
+    red.AddComponent(new SocketController(redparams));
+    red.AddComponent(new SocketDraw(redparams));
 
     const greenparams = {
       color: `6, 136, 86`,
@@ -52,6 +56,8 @@ class Game {
     green.AddComponent(new FieldDraw(greenparams));
     green.AddComponent(new FieldController());
     green.AddComponent(new FieldDraw(greenparams));
+    green.AddComponent(new SocketController(greenparams));
+    green.AddComponent(new SocketDraw(greenparams));
 
     const violetparams = {
       color: `68, 9, 107`,
@@ -69,6 +75,8 @@ class Game {
     violet.AddComponent(new FieldDraw(violetparams));
     violet.AddComponent(new FieldController());
     violet.AddComponent(new FieldDraw(violetparams));
+    violet.AddComponent(new SocketController(violetparams));
+    violet.AddComponent(new SocketDraw(violetparams));
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);

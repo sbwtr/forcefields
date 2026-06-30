@@ -9,6 +9,7 @@ export class DotController extends Component {
     this.velocity = undefined;
     this.position = undefined;
     this.collide = false;
+    this.active = true;
   }
   get NAME() {
     return DotController.classname;
@@ -24,34 +25,47 @@ export class DotController extends Component {
     this.position = { x: x, y: y };
     this.owner.SetParam("d.position", this.position);
     this.owner.RegisterHandler("dot.collide", (msg) => this.OnCollide(msg));
+    this.owner.RegisterHandler("dot.active", (msg) => this.OnDotActive(msg));
   }
+
   OnCollide(msg) {
     this.collide = true;
     this.force = { ...msg.force };
   }
-  Update(dt, time) {
-    if (
-      this.position.x > canvas.width - this.owner.GetParam("d.radius") ||
-      this.position.x < this.owner.GetParam("d.radius")
-    ) {
-      this.velocity.x *= -1;
-    }
-    if (
-      this.position.y > canvas.height - this.owner.GetParam("d.radius") ||
-      this.position.y < this.owner.GetParam("d.radius")
-    ) {
-      this.velocity.y *= -1;
-    }
-    if (this.collide) {
-      this.velocity.x += this.force.x * dt;
-      this.velocity.y += this.force.y * dt;
-      this.collide = false;
-    }
-    this.velocity.x *= 0.998;
-    this.velocity.y *= 0.998;
-    this.position.x += this.velocity.x * dt;
-    this.position.y += this.velocity.y * dt;
+  OnDotActive(msg) {
+    this.active = msg.value;
+  }
 
-    this.owner.SetParam("d.position", this.position);
+  Update(dt, time) {
+    if (this.active) {
+      if (
+        this.position.x > canvas.width - this.owner.GetParam("d.radius") ||
+        this.position.x < this.owner.GetParam("d.radius")
+      ) {
+        this.velocity.x *= -1;
+      }
+      if (
+        this.position.y > canvas.height - this.owner.GetParam("d.radius") ||
+        this.position.y < this.owner.GetParam("d.radius")
+      ) {
+        this.velocity.y *= -1;
+      }
+      if (this.collide) {
+        this.velocity.x += this.force.x * dt;
+        this.velocity.y += this.force.y * dt;
+        this.collide = false;
+      }
+      this.velocity.x *= 0.998;
+      this.velocity.y *= 0.998;
+      this.position.x += this.velocity.x * dt;
+      this.position.y += this.velocity.y * dt;
+
+      this.owner.SetParam("d.position", this.position);
+    } else {
+      this.position = null;
+      this.force = null;
+      this.velocity = null;
+      this.owner.SetParam("d.position", this.position);
+    }
   }
 }
