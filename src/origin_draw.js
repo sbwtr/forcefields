@@ -38,18 +38,15 @@ export class OriginDraw extends Component {
     if (this.drawline) {
       const origin = this.owner.GetComponent("OriginController");
       ctx.beginPath();
-      ctx.moveTo(
-        this.owner.GetParam("o.position").x,
-        this.owner.GetParam("o.position").y,
-      );
+      ctx.moveTo(this.params.opos.x, this.params.opos.y);
       ctx.lineTo(this.tippos.x, this.tippos.y);
       ctx.strokeStyle = `rgb(${this.params.color})`;
       ctx.stroke();
     }
     ctx.beginPath();
     ctx.arc(
-      this.owner.GetParam("o.position").x,
-      this.owner.GetParam("o.position").y,
+      this.params.opos.x,
+      this.params.opos.y,
       this.RADIUS,
       0,
       Math.PI * 2,
@@ -62,45 +59,18 @@ export class OriginDraw extends Component {
     ctx.closePath();
     ctx.beginPath();
     ctx.moveTo(
-      this.owner.GetParam("o.position").x - this.RADIUS,
-      this.owner.GetParam("o.position").y + this.RADIUS,
+      this.params.opos.x - this.RADIUS,
+      this.params.opos.y + this.RADIUS,
     );
-    ctx.lineTo(
-      this.owner.GetParam("o.position").x - 10,
-      this.owner.GetParam("o.position").y - this.RADIUS,
-    );
-    ctx.moveTo(
-      this.owner.GetParam("o.position").x - 10,
-      this.owner.GetParam("o.position").y - this.RADIUS,
-    );
-    ctx.lineTo(
-      this.owner.GetParam("o.position").x - 10,
-      this.owner.GetParam("o.position").y + this.RADIUS,
-    );
-    ctx.moveTo(
-      this.owner.GetParam("o.position").x - 10,
-      this.owner.GetParam("o.position").y + this.RADIUS,
-    );
-    ctx.lineTo(
-      this.owner.GetParam("o.position").x + 25,
-      this.owner.GetParam("o.position").y - this.RADIUS,
-    );
-    ctx.moveTo(
-      this.owner.GetParam("o.position").x + 25,
-      this.owner.GetParam("o.position").y - this.RADIUS,
-    );
-    ctx.lineTo(
-      this.owner.GetParam("o.position").x + 25,
-      this.owner.GetParam("o.position").y + this.RADIUS,
-    );
-    ctx.moveTo(
-      this.owner.GetParam("o.position").x + 25,
-      this.owner.GetParam("o.position").y + this.RADIUS,
-    );
-    ctx.lineTo(
-      this.owner.GetParam("o.position").x + 65,
-      this.owner.GetParam("o.position").y - this.RADIUS,
-    );
+    ctx.lineTo(this.params.opos.x - 10, this.params.opos.y - this.RADIUS);
+    ctx.moveTo(this.params.opos.x - 10, this.params.opos.y - this.RADIUS);
+    ctx.lineTo(this.params.opos.x - 10, this.params.opos.y + this.RADIUS);
+    ctx.moveTo(this.params.opos.x - 10, this.params.opos.y + this.RADIUS);
+    ctx.lineTo(this.params.opos.x + 25, this.params.opos.y - this.RADIUS);
+    ctx.moveTo(this.params.opos.x + 25, this.params.opos.y - this.RADIUS);
+    ctx.lineTo(this.params.opos.x + 25, this.params.opos.y + this.RADIUS);
+    ctx.moveTo(this.params.opos.x + 25, this.params.opos.y + this.RADIUS);
+    ctx.lineTo(this.params.opos.x + 65, this.params.opos.y - this.RADIUS);
     ctx.strokeStyle = `rgb(${this.params.color})`;
     ctx.stroke();
   }

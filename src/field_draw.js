@@ -18,7 +18,6 @@ export class FieldDraw extends Component {
     this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldSpawn(msg));
   }
   OnFieldSpawn(msg) {
-    console.log(msg);
     this.draw = msg.draw;
     this.params.radius = msg.radius;
     this.alpha = msg.alpha;

@@ -7,7 +7,7 @@ import { DotController } from "./src/dot_ctrl.js";
 import { DotDraw } from "./src/dot_draw.js";
 import { FieldController } from "./src/field_ctrl.js";
 import { FieldDraw } from "./src/field_draw.js";
-import * as calc from "./src/helpers.js";
+import { cells } from "./src/helpers.js";
 
 class Game {
   constructor() {
@@ -17,13 +17,17 @@ class Game {
   #init() {
     this.entitymanager = new EntityManager();
 
+    const data = cells(150, 50, 3);
+
     const redparams = {
       color: `206, 58, 21`,
       radius: 5,
+      opos: data.filter((d) => d.prob > 0.5)[0],
+      spos: data.filter((d) => d.prob < 0.5)[2],
     };
     const red = new Entity();
     this.entitymanager.Add("red", red);
-    red.AddComponent(new OriginController({ x: 300, y: 300 }));
+    red.AddComponent(new OriginController(redparams));
     red.AddComponent(new OriginDraw(redparams));
     red.AddComponent(new DotController());
     red.AddComponent(new DotDraw(redparams));
@@ -35,10 +39,12 @@ class Game {
     const greenparams = {
       color: `6, 136, 86`,
       radius: 5,
+      opos: data.filter((d) => d.prob > 0.5)[2],
+      spos: data.filter((d) => d.prob < 0.5)[1],
     };
     const green = new Entity();
     this.entitymanager.Add("green", green);
-    green.AddComponent(new OriginController({ x: 600, y: 700 }));
+    green.AddComponent(new OriginController(greenparams));
     green.AddComponent(new OriginDraw(greenparams));
     green.AddComponent(new DotController());
     green.AddComponent(new DotDraw(greenparams));
@@ -50,10 +56,12 @@ class Game {
     const violetparams = {
       color: `68, 9, 107`,
       radius: 5,
+      opos: data.filter((d) => d.prob > 0.5)[1],
+      spos: data.filter((d) => d.prob < 0.5)[0],
     };
     const violet = new Entity();
     this.entitymanager.Add("violet", violet);
-    violet.AddComponent(new OriginController({ x: 1000, y: 400 }));
+    violet.AddComponent(new OriginController(violetparams));
     violet.AddComponent(new OriginDraw(violetparams));
     violet.AddComponent(new DotController());
     violet.AddComponent(new DotDraw(violetparams));

@@ -5,7 +5,7 @@ export class OriginController extends Component {
   static classname = "OriginController";
   constructor(params) {
     super();
-    this.position = { ...params };
+    this.params = { ...params };
     this.active = false;
     window.addEventListener("mousemove", (e) => this.OnMove(e));
     window.addEventListener("click", (e) => this.OnClick(e));
@@ -14,7 +14,7 @@ export class OriginController extends Component {
     return OriginController.classname;
   }
   InitComponent() {
-    this.owner.SetParam("o.position", this.position);
+    this.owner.SetParam("o.position", this.params.opos);
   }
 
   OnMove(event) {
@@ -23,7 +23,7 @@ export class OriginController extends Component {
       topic: "origin.line",
       pos: { x: vec.x, y: vec.y },
     });
-    if (distance(vec, this.position) < 50) {
+    if (distance(vec, this.params.opos) < 50) {
       this.active = true;
       this.owner.Broadcast({ topic: "origin.active", value: this.active });
     }

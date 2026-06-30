@@ -16,7 +16,6 @@ export class DotController extends Component {
   InitComponent() {
     const x = canvas.width / 2 + (Math.random() * 2 - 1) * 20;
     const y = canvas.height / 2 + (Math.random() * 2 - 1) * 20;
-    console.log(x, y);
     this.force = { x: 0, y: 0 };
     this.velocity = {
       x: (Math.random() * 2 - 1) * 80,
