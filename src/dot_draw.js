@@ -6,7 +6,7 @@ export class DotDraw extends Component {
   constructor(params) {
     super();
     this.params = { ...params };
-    this.draw = true;
+    this.active = true;
   }
   get NAME() {
     return DotDraw.classname;
@@ -16,10 +16,10 @@ export class DotDraw extends Component {
     this.owner.RegisterHandler("dot.active", (msg) => this.OnDotActive(msg));
   }
   OnDotActive(msg) {
-    this.draw = msg.value;
+    this.active = msg.value;
   }
   Update(dt, time) {
-    if (this.draw) {
+    if (this.active) {
       ctx.beginPath();
       ctx.arc(
         this.owner.GetParam("d.position").x,

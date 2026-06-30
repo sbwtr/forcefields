@@ -16,10 +16,13 @@ export class SocketController extends Component {
       const dot = this.owner.GetComponent("DotController");
       const socket = this.owner.GetComponent("SocketDraw");
       if (distance(dot.position, this.params.spos) < 35) {
-        this.active = false;
-        this.owner.Broadcast({ topic: "socket.draw", value: this.active });
-        this.owner.Broadcast({ topic: "particles.spawn", value: true });
+        this.owner.Broadcast({ topic: "socket.draw", value: false });
+        this.owner.Broadcast({
+          topic: "particles.spawn",
+          pos: this.params.spos,
+        });
         this.owner.Broadcast({ topic: "dot.active", value: false });
+        this.active = false;
       }
     }
   }

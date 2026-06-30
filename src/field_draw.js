@@ -6,7 +6,7 @@ export class FieldDraw extends Component {
   constructor(params) {
     super();
     this.params = { ...params };
-    this.draw = false;
+    this.active = false;
     this.alpha = 0;
     this.position = undefined;
   }
@@ -18,13 +18,13 @@ export class FieldDraw extends Component {
     this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldSpawn(msg));
   }
   OnFieldSpawn(msg) {
-    this.draw = msg.draw;
+    this.active = msg.draw;
     this.params.radius = msg.radius;
     this.alpha = msg.alpha;
     this.position = { ...msg.pos };
   }
   Update(dt, time) {
-    if (this.draw) {
+    if (this.active) {
       ctx.beginPath();
       ctx.arc(
         this.position.x,

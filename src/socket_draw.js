@@ -7,7 +7,7 @@ export class SocketDraw extends Component {
   constructor(params) {
     super();
     this.params = { ...params };
-    this.draw = true;
+    this.active = true;
   }
   get NAME() {
     return SocketDraw.classname;
@@ -16,11 +16,11 @@ export class SocketDraw extends Component {
     this.owner.RegisterHandler("socket.draw", (msg) => this.OnSocketDraw(msg));
   }
   OnSocketDraw(msg) {
-    this.draw = msg.value;
+    this.active = msg.value;
   }
 
   Update(dt, time) {
-    if (this.draw) {
+    if (this.active) {
       ctx.beginPath();
       ctx.arc(
         this.params.spos.x,
@@ -31,10 +31,10 @@ export class SocketDraw extends Component {
         false,
       );
       const lgrad = ctx.createLinearGradient(
+        this.params.spos.x + this.#radius / 2,
+        this.params.spos.y + this.#radius / 2,
         this.params.spos.x - this.#radius,
         this.params.spos.y - this.#radius,
-        this.params.spos.x + this.#radius,
-        this.params.spos.y + this.#radius,
       );
       lgrad.addColorStop(0, `rgba(${this.params.color},1)`);
       lgrad.addColorStop(1, `rgba(${this.params.color},0)`);
