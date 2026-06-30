@@ -7,6 +7,7 @@ import { DotController } from "./src/dot_ctrl.js";
 import { DotDraw } from "./src/dot_draw.js";
 import { FieldController } from "./src/field_ctrl.js";
 import { FieldDraw } from "./src/field_draw.js";
+import * as calc from "./src/helpers.js";
 
 class Game {
   constructor() {

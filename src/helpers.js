@@ -1,14 +1,12 @@
-//import { canvas } from "./ctx.js";
-const cw = 1920;
-const ch = 1080;
+import { canvas } from "./ctx.js";
 
-function cells(xstart, ystart, divnum) {
+export function cells(xstart, ystart, divnum) {
   const opos = [];
   for (let i = 0; i < divnum; i++) {
     for (let j = 0; j < divnum; j++) {
       opos.push({
-        x: xstart + xstart / 2 + (cw / divnum) * i,
-        y: ystart + xstart / 2 + (ch / divnum) * j,
+        x: xstart + xstart / 2 + (canvas.width / divnum) * i,
+        y: ystart + xstart / 2 + (canvas.height / divnum) * j,
         prob: Math.random(),
       });
     }
@@ -16,4 +14,7 @@ function cells(xstart, ystart, divnum) {
   return opos;
 }
 
-console.log(cells(100, 100, 3));
+export function distance(a, b) {
+  const sub = { x: a.x - b.x, y: a.y - b.y };
+  return Math.sqrt(sub.x * sub.x + sub.y * sub.y);
+}

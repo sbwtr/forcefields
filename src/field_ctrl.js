@@ -1,4 +1,5 @@
 import { Component } from "./component.js";
+import { distance } from "./helpers.js";
 
 export class FieldController extends Component {
   static classname = "FieldController";
@@ -22,16 +23,7 @@ export class FieldController extends Component {
     if (this.position) {
       const dot = this.owner.GetComponent("DotController");
       const fieldradius = this.owner.GetComponent("FieldDraw");
-      const maxX = this.position.x + fieldradius.params.radius;
-      const maxY = this.position.y + fieldradius.params.radius;
-      const minX = this.position.x - fieldradius.params.radius;
-      const minY = this.position.y - fieldradius.params.radius;
-      if (
-        dot.position.x < maxX &&
-        dot.position.y < maxY &&
-        dot.position.x > minX &&
-        dot.position.y > minY
-      ) {
+      if (distance(dot.position, this.position) < fieldradius.params.radius) {
         const dir = {
           x: (dot.position.x - this.position.x) * fieldradius.params.radius,
           y: (dot.position.y - this.position.y) * fieldradius.params.radius,
