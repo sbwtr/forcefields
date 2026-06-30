@@ -35,7 +35,6 @@ export class SocketController extends Component {
           .Broadcast({ topic: "dot.score", value: 10 });
 
         this.owner.Broadcast({ topic: "dot.score", value: null });
-        this.active = false;
       }
     }
   }

@@ -50,7 +50,6 @@ export class DotController extends Component {
     this.SetVelocity();
     this.SetPosition();
     this.owner.Broadcast({ topic: "socket.active", value: true });
-    console.log("dotscore");
   }
 
   Update(dt, time) {
