@@ -47,6 +47,13 @@ export class FieldDraw extends Component {
           alpha: 1,
         });
       }
+      ctx.font = `10px "Major Mono Display"`;
+      ctx.textBaseline = "middle";
+      ctx.fillText(
+        `f: ${Math.floor(this.params.radius)}`,
+        this.position.x + this.params.radius + 20,
+        this.position.y,
+      );
     }
   }
 }

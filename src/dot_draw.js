@@ -31,6 +31,13 @@ export class DotDraw extends Component {
       );
       ctx.fillStyle = `rgb(${this.params.color})`;
       ctx.fill();
+      ctx.font = `10px "Major Mono Display"`;
+      ctx.textBaseline = "middle";
+      ctx.fillText(
+        `v: ${this.owner.GetParam("d.velocity").x.toFixed(3)}/${this.owner.GetParam("d.velocity").y.toFixed(3)}`,
+        this.owner.GetParam("d.position").x + 10,
+        this.owner.GetParam("d.position").y,
+      );
     }
   }
 }

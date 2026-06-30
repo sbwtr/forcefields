@@ -61,11 +61,13 @@ export class DotController extends Component {
       this.position.y += this.velocity.y * dt;
 
       this.owner.SetParam("d.position", this.position);
+      this.owner.SetParam("d.velocity", this.velocity);
     } else {
       this.position = null;
       this.force = null;
       this.velocity = null;
       this.owner.SetParam("d.position", this.position);
+      this.owner.SetParam("d.velocity", this.velocity);
     }
   }
 }
