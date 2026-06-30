@@ -56,8 +56,8 @@ export class OriginDraw extends Component {
       false,
     );
     ctx.strokeStyle = `rgb(${this.params.color})`;
-    ctx.fillStyle = `rgb(211, 211, 211)`;
-    ctx.fill();
+    /*ctx.fillStyle = `rgb(211, 211, 211)`;
+    ctx.fill(); */
     ctx.stroke();
     ctx.closePath();
     ctx.beginPath();

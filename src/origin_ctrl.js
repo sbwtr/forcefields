@@ -27,13 +27,6 @@ export class OriginController extends Component {
       this.active = true;
       this.owner.Broadcast({ topic: "origin.active", value: this.active });
     }
-    /* if (
-      event.offsetX > this.position.x &&
-      event.offsetX < this.position.x + this.owner.GetParam("o.radius") &&
-      event.offsetY > this.position.y &&
-      event.offsetY < this.position.y + this.owner.GetParam("o.radius")
-    ) {
-    } */
   }
   OnClick(event) {
     /*   this.owner.Broadcast({
