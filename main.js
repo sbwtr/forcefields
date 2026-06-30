@@ -10,6 +10,7 @@ import { FieldDraw } from "./src/field_draw.js";
 import { cells } from "./src/helpers.js";
 import { SocketController } from "./src/socket_ctrl.js";
 import { SocketDraw } from "./src/socket_draw.js";
+import { UIController } from "./src/ui_ctrl.js";
 
 class Game {
   constructor() {
@@ -18,6 +19,14 @@ class Game {
   }
   #init() {
     this.entitymanager = new EntityManager();
+
+    const uiparams = {
+      pos: { x: canvas.width / 2, y: canvas.height / 2 },
+      gap: 30,
+    };
+    const ui = new Entity();
+    this.entitymanager.Add("ui", ui);
+    ui.AddComponent(new UIController(uiparams));
 
     const data = cells(150, 50, 3);
 
