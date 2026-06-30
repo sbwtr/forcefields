@@ -1,4 +1,5 @@
 import { Component } from "./component.js";
+import { distance } from "./helpers.js";
 
 export class OriginController extends Component {
   static classname = "OriginController";
@@ -17,19 +18,22 @@ export class OriginController extends Component {
   }
 
   OnMove(event) {
+    const vec = { x: event.offsetX, y: event.offsetY };
     this.owner.Broadcast({
       topic: "origin.line",
-      pos: { x: event.offsetX, y: event.offsetY },
+      pos: { x: vec.x, y: vec.y },
     });
-    if (
+    if (distance(vec, this.position) < 50) {
+      this.active = true;
+      this.owner.Broadcast({ topic: "origin.active", value: this.active });
+    }
+    /* if (
       event.offsetX > this.position.x &&
       event.offsetX < this.position.x + this.owner.GetParam("o.radius") &&
       event.offsetY > this.position.y &&
       event.offsetY < this.position.y + this.owner.GetParam("o.radius")
     ) {
-      this.active = true;
-      this.owner.Broadcast({ topic: "origin.active", value: this.active });
-    }
+    } */
   }
   OnClick(event) {
     /*   this.owner.Broadcast({
