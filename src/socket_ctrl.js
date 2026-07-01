@@ -11,14 +11,14 @@ export class SocketController extends Component {
   get NAME() {
     return SocketController.classname;
   }
-  InitComponent() {
+  /*   InitComponent() {
     this.owner.RegisterHandler("socket.active", (msg) =>
       this.OnSocketActive(msg),
     );
   }
   OnSocketActive(msg) {
     this.active = msg.value;
-  }
+  } */
   Update(dt, time) {
     if (this.active) {
       const dot = this.owner.GetComponent("DotController");

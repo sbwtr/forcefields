@@ -18,7 +18,7 @@ export class OriginController extends Component {
   }
 
   OnMove(event) {
-    const vec = { x: event.offsetX, y: event.offsetY };
+    const vec = { x: event.clientX, y: event.clientY };
     this.owner.Broadcast({
       topic: "origin.line",
       pos: { x: vec.x, y: vec.y },
@@ -44,6 +44,9 @@ export class OriginController extends Component {
         radius: 5,
         alpha: 1,
       });
+      this.owner.manager
+        .Get("ui")
+        .Broadcast({ topic: "field.spawn", value: 1 });
       this.active = false;
       this.owner.Broadcast({ topic: "origin.active", value: this.active });
     }

@@ -31,7 +31,7 @@ class Game {
     const data = cells(150, 50, 3);
 
     const redparams = {
-      color: `206, 58, 21`,
+      color: `255, 25, 77`,
       radius: 5,
       opos: data.filter((d) => d.prob > 0.5)[0],
       spos: data.filter((d) => d.prob < 0.5)[2],
@@ -50,7 +50,7 @@ class Game {
     red.AddComponent(new SocketDraw(redparams));
 
     const greenparams = {
-      color: `6, 136, 86`,
+      color: `255, 115, 38`,
       radius: 5,
       opos: data.filter((d) => d.prob > 0.5)[2],
       spos: data.filter((d) => d.prob < 0.5)[1],
@@ -69,7 +69,7 @@ class Game {
     green.AddComponent(new SocketDraw(greenparams));
 
     const violetparams = {
-      color: `68, 9, 107`,
+      color: `191, 38, 105`,
       radius: 5,
       opos: data.filter((d) => d.prob > 0.5)[1],
       spos: data.filter((d) => d.prob < 0.5)[0],

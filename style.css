@@ -2,10 +2,58 @@
 
 body {
   margin: 0;
-  background-color: rgb(211, 211, 211);
+  box-sizing: border-box;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(201, 201, 201);
+  display: flex;
+  flex-wrap: nowrap;
+}
+.canvasbox {
+  min-width: 75%;
+  padding: 10px;
 }
 canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
+  background-color: rgb(209, 209, 209);
+  border-radius: 8px;
+}
+
+.rbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  font-family: "Major Mono Display";
+  font-size: large;
+}
+
+.aboutbox {
+  text-align: center;
+}
+.sbwtr {
+  font-size: xx-large;
+}
+.title {
+  color: rgb(240 96 96);
+  font-size: large;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
 }

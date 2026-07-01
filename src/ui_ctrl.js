@@ -7,26 +7,39 @@ export class UIController extends Component {
     super();
     this.params = { ...params };
     this.data = undefined;
+    this.b = undefined;
+    this.s = undefined;
+    this.f = undefined;
   }
   get NAME() {
     return UIController.classname;
   }
 
   InitComponent() {
-    this.owner.RegisterHandler("dot.bounce", (msg) => this.OnDotBounce(msg));
     this.owner.RegisterHandler("dot.score", (msg) => this.OnDotScore(msg));
-    this.data = { bounce: 0, score: 0 };
-  }
-
-  OnDotBounce(msg) {
-    this.data.bounce += msg.value;
+    this.owner.RegisterHandler("dot.bounce", (msg) => this.OnDotBounce(msg));
+    this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldSpawn(msg));
+    this.data = { bounce: 0, score: 0, field: 0 };
+    this.s = document.querySelector("#svalue");
+    this.b = document.querySelector("#sbounce");
+    this.f = document.querySelector("#sfield");
   }
 
   OnDotScore(msg) {
     this.data.score += msg.value;
+    this.s.innerText = this.data.score;
   }
 
-  Update(dt, time) {
+  OnDotBounce(msg) {
+    this.data.bounce += msg.value;
+    this.b.innerText = this.data.bounce;
+  }
+
+  OnFieldSpawn(msg) {
+    this.data.field += msg.value;
+    this.f.innerText = this.data.field;
+  }
+  /* Update(dt, time) {
     ctx.font = `25px "Major Mono Display"`;
     ctx.fillStyle = `rgb(0,0,0,.7)`;
     const twidth = ctx.measureText("Bounce: 10");
@@ -40,5 +53,5 @@ export class UIController extends Component {
       this.params.pos.x - twidth.width / 2,
       this.params.pos.y + this.params.gap + 100,
     );
-  }
+  } */
 }
