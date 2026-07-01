@@ -31,6 +31,7 @@ export class DotDraw extends Component {
       );
       ctx.fillStyle = `rgb(${this.params.color})`;
       ctx.fill();
+      ctx.fillStyle = `rgb(0,0,0,.7)`;
       ctx.font = `10px "Major Mono Display"`;
       ctx.textBaseline = "middle";
       ctx.fillText(
