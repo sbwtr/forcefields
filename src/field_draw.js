@@ -36,8 +36,9 @@ export class FieldDraw extends Component {
       );
       this.owner.SetParam("f.radius", this.params.radius);
       this.alpha -= dt * 0.1;
-      ctx.fillStyle = `rgba(${this.params.color},${this.alpha})`;
-      ctx.fill();
+      ctx.strokeStyle = `rgba(${this.params.color},${this.alpha})`;
+      ctx.lineWidth = 6;
+      ctx.stroke();
       if (this.alpha < 0) {
         this.owner.Broadcast({
           topic: "field.spawn",

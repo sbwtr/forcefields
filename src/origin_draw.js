@@ -3,7 +3,7 @@ import { ctx, canvas } from "./ctx.js";
 
 export class OriginDraw extends Component {
   static classname = "OriginDraw";
-  #radius = 50;
+  #radius = 20;
   constructor(params) {
     super();
     this.params = { ...params };
@@ -41,6 +41,7 @@ export class OriginDraw extends Component {
       ctx.moveTo(this.params.opos.x, this.params.opos.y);
       ctx.lineTo(this.tippos.x, this.tippos.y);
       ctx.strokeStyle = `rgb(${this.params.color})`;
+      ctx.lineWidth = 3;
       ctx.stroke();
     }
     ctx.beginPath();
@@ -52,26 +53,27 @@ export class OriginDraw extends Component {
       Math.PI * 2,
       false,
     );
-    ctx.strokeStyle = `rgb(${this.params.color})`;
-    /*ctx.fillStyle = `rgb(211, 211, 211)`;
-    ctx.fill(); */
-    ctx.stroke();
+    ctx.lineWidth = 6;
+    ctx.fillStyle = `rgb(${this.params.color})`;
+    ctx.fill();
     ctx.closePath();
-    ctx.beginPath();
-    ctx.moveTo(
-      this.params.opos.x - this.RADIUS,
-      this.params.opos.y + this.RADIUS,
-    );
-    ctx.lineTo(this.params.opos.x - 10, this.params.opos.y - this.RADIUS);
-    ctx.moveTo(this.params.opos.x - 10, this.params.opos.y - this.RADIUS);
-    ctx.lineTo(this.params.opos.x - 10, this.params.opos.y + this.RADIUS);
-    ctx.moveTo(this.params.opos.x - 10, this.params.opos.y + this.RADIUS);
-    ctx.lineTo(this.params.opos.x + 25, this.params.opos.y - this.RADIUS);
-    ctx.moveTo(this.params.opos.x + 25, this.params.opos.y - this.RADIUS);
-    ctx.lineTo(this.params.opos.x + 25, this.params.opos.y + this.RADIUS);
-    ctx.moveTo(this.params.opos.x + 25, this.params.opos.y + this.RADIUS);
-    ctx.lineTo(this.params.opos.x + 65, this.params.opos.y - this.RADIUS);
-    ctx.strokeStyle = `rgb(${this.params.color})`;
-    ctx.stroke();
   }
 }
+
+/* ctx.beginPath();
+ctx.moveTo(
+  this.params.opos.x - this.RADIUS,
+  this.params.opos.y + this.RADIUS,
+);
+ctx.lineTo(this.params.opos.x - 10, this.params.opos.y - this.RADIUS);
+ctx.moveTo(this.params.opos.x - 10, this.params.opos.y - this.RADIUS);
+ctx.lineTo(this.params.opos.x - 10, this.params.opos.y + this.RADIUS);
+ctx.moveTo(this.params.opos.x - 10, this.params.opos.y + this.RADIUS);
+ctx.lineTo(this.params.opos.x + 25, this.params.opos.y - this.RADIUS);
+ctx.moveTo(this.params.opos.x + 25, this.params.opos.y - this.RADIUS);
+ctx.lineTo(this.params.opos.x + 25, this.params.opos.y + this.RADIUS);
+ctx.moveTo(this.params.opos.x + 25, this.params.opos.y + this.RADIUS);
+ctx.lineTo(this.params.opos.x + 65, this.params.opos.y - this.RADIUS);
+ctx.strokeStyle = `rgb(${this.params.color})`;
+ctx.lineWidth = 1;
+ctx.stroke(); */
