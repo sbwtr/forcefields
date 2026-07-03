@@ -11,6 +11,7 @@ import { cells } from "./src/helpers.js";
 import { SocketController } from "./src/socket_ctrl.js";
 import { SocketDraw } from "./src/socket_draw.js";
 import { UIController } from "./src/ui_ctrl.js";
+import { Particles } from "./src/particles.js";
 
 class Game {
   constructor() {
@@ -48,6 +49,7 @@ class Game {
     red.AddComponent(new FieldDraw(redparams));
     red.AddComponent(new SocketController(redparams));
     red.AddComponent(new SocketDraw(redparams));
+    red.AddComponent(new Particles(redparams));
 
     const greenparams = {
       color: `21, 47, 36`,
@@ -67,6 +69,7 @@ class Game {
     green.AddComponent(new FieldDraw(greenparams));
     green.AddComponent(new SocketController(greenparams));
     green.AddComponent(new SocketDraw(greenparams));
+    green.AddComponent(new Particles(greenparams));
 
     const violetparams = {
       /*       rgb(106 86 24)*/
@@ -87,6 +90,7 @@ class Game {
     violet.AddComponent(new FieldDraw(violetparams));
     violet.AddComponent(new SocketController(violetparams));
     violet.AddComponent(new SocketDraw(violetparams));
+    violet.AddComponent(new Particles(violetparams));
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);

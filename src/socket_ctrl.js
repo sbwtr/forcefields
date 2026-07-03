@@ -6,36 +6,32 @@ export class SocketController extends Component {
   constructor(params) {
     super();
     this.params = { ...params };
-    this.active = true;
+    this.position = undefined;
   }
   get NAME() {
     return SocketController.classname;
   }
-  /*   InitComponent() {
-    this.owner.RegisterHandler("socket.active", (msg) =>
+  InitComponent() {
+    this.position = { ...this.params.spos };
+    /* this.owner.RegisterHandler("socket.active", (msg) =>
       this.OnSocketActive(msg),
-    );
+    ); */
   }
-  OnSocketActive(msg) {
+  /*OnSocketActive(msg) {
     this.active = msg.value;
   } */
   Update(dt, time) {
-    if (this.active) {
-      const dot = this.owner.GetComponent("DotController");
-      const socket = this.owner.GetComponent("SocketDraw");
-      if (distance(dot.position, this.params.spos) < 47) {
-        this.owner.Broadcast({
-          topic: "particles.spawn",
-          pos: this.params.spos,
-          rad: 50,
-        });
+    const dot = this.owner.GetComponent("DotController");
+    const socket = this.owner.GetComponent("SocketDraw");
+    if (distance(dot.position, this.params.spos) < 47) {
+      this.owner.Broadcast({
+        topic: "particles.spawn",
+        value: true,
+      });
 
-        this.owner.manager
-          .Get("ui")
-          .Broadcast({ topic: "dot.score", value: 10 });
+      this.owner.manager.Get("ui").Broadcast({ topic: "dot.score", value: 10 });
 
-        this.owner.Broadcast({ topic: "dot.score", value: null });
-      }
+      this.owner.Broadcast({ topic: "dot.score", value: null });
     }
   }
 }
