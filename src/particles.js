@@ -1,5 +1,5 @@
 import { Component } from "./component.js";
-import { LinearSpline } from "./helpers.js";
+import { LinearSpline, maprange } from "./helpers.js";
 import { ctx } from "./ctx.js";
 
 export class Particles extends Component {
@@ -33,7 +33,7 @@ export class Particles extends Component {
   #SetParticles() {
     for (let i = 0; i < 100; i++) {
       const life = (Math.random() * 0.6 + 0.4) * 2;
-      const ang = 0 + ((Math.PI * 2 - 0) / (100 - 0)) * (i - 0);
+      const ang = maprange(i, 0, 100, 0, Math.PI * 2);
       const speed = Math.random() * 100 + 10;
 
       this.particles.push({

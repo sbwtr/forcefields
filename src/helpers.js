@@ -19,6 +19,10 @@ export function distance(a, b) {
   return Math.sqrt(sub.x * sub.x + sub.y * sub.y);
 }
 
+export function maprange(value, in_min, in_max, out_min, out_max) {
+  return out_max + ((out_max - out_min) / (in_max - in_min)) * (value - in_min);
+}
+
 export class LinearSpline {
   constructor(lerpfunc) {
     this.points = [];
