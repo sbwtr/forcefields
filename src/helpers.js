@@ -23,6 +23,9 @@ export function maprange(value, in_min, in_max, out_min, out_max) {
   return out_max + ((out_max - out_min) / (in_max - in_min)) * (value - in_min);
 }
 
+export const randrange = (lo, hi) => lo + Math.random() * (hi - lo);
+export const randpick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 export class LinearSpline {
   constructor(lerpfunc) {
     this.points = [];

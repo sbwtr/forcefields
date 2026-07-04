@@ -71,26 +71,25 @@ class Game {
     green.AddComponent(new SocketDraw(greenparams));
     green.AddComponent(new Particles(greenparams));
 
-    const violetparams = {
-      /*       rgb(106 86 24)*/
+    const yellowparams = {
       color: `254, 204, 13`,
       radius: 5,
       opos: data.filter((d) => d.prob > 0.5)[1],
       spos: data.filter((d) => d.prob < 0.5)[0],
     };
-    const violet = new Entity();
-    this.entitymanager.Add("violet", violet);
-    violet.AddComponent(new OriginController(violetparams));
-    violet.AddComponent(new OriginDraw(violetparams));
-    violet.AddComponent(new DotController());
-    violet.AddComponent(new DotDraw(violetparams));
-    violet.AddComponent(new FieldController());
-    violet.AddComponent(new FieldDraw(violetparams));
-    violet.AddComponent(new FieldController());
-    violet.AddComponent(new FieldDraw(violetparams));
-    violet.AddComponent(new SocketController(violetparams));
-    violet.AddComponent(new SocketDraw(violetparams));
-    violet.AddComponent(new Particles(violetparams));
+    const yellow = new Entity();
+    this.entitymanager.Add("yellow", yellow);
+    yellow.AddComponent(new OriginController(yellowparams));
+    yellow.AddComponent(new OriginDraw(yellowparams));
+    yellow.AddComponent(new DotController());
+    yellow.AddComponent(new DotDraw(yellowparams));
+    yellow.AddComponent(new FieldController());
+    yellow.AddComponent(new FieldDraw(yellowparams));
+    yellow.AddComponent(new FieldController());
+    yellow.AddComponent(new FieldDraw(yellowparams));
+    yellow.AddComponent(new SocketController(yellowparams));
+    yellow.AddComponent(new SocketDraw(yellowparams));
+    yellow.AddComponent(new Particles(yellowparams));
   }
   Update(dt, time) {
     this.entitymanager.Update(dt, time);
