@@ -49,7 +49,6 @@ export class DotController extends Component {
     this.SetForce();
     this.SetVelocity();
     this.SetPosition();
-    this.owner.Broadcast({ topic: "socket.active", value: true });
   }
 
   Update(dt, time) {

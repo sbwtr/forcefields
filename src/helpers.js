@@ -1,19 +1,5 @@
 import { canvas } from "./ctx.js";
 
-export function cells(xstart, ystart, divnum) {
-  const opos = [];
-  for (let i = 0; i < divnum; i++) {
-    for (let j = 0; j < divnum; j++) {
-      opos.push({
-        x: xstart + xstart / 2 + (canvas.width / divnum) * i,
-        y: ystart + xstart / 2 + (canvas.height / divnum) * j,
-        prob: Math.random(),
-      });
-    }
-  }
-  return opos;
-}
-
 export function distance(a, b) {
   const sub = { x: a.x - b.x, y: a.y - b.y };
   return Math.sqrt(sub.x * sub.x + sub.y * sub.y);
@@ -24,7 +10,24 @@ export function maprange(value, in_min, in_max, out_min, out_max) {
 }
 
 export const randrange = (lo, hi) => lo + Math.random() * (hi - lo);
+
 export const randpick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+export const randindex = (arr) => Math.floor(Math.random() * arr.length);
+
+export function cells(xstart, ystart, divnum) {
+  const opos = [];
+  for (let i = 0; i < divnum; i++) {
+    for (let j = 0; j < divnum; j++) {
+      opos.push({
+        x: xstart + xstart / 2 + (canvas.width / divnum) * i,
+        y: ystart + xstart / 2 + (canvas.height / divnum) * j,
+      });
+    }
+  }
+  opos.splice(Math.floor((divnum * divnum) / 2), 1);
+  return opos;
+}
 
 export class LinearSpline {
   constructor(lerpfunc) {

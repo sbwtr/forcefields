@@ -7,7 +7,7 @@ import { DotController } from "./src/dot_ctrl.js";
 import { DotDraw } from "./src/dot_draw.js";
 import { FieldController } from "./src/field_ctrl.js";
 import { FieldDraw } from "./src/field_draw.js";
-import { cells } from "./src/helpers.js";
+import { cells, randindex, randpick } from "./src/helpers.js";
 import { SocketController } from "./src/socket_ctrl.js";
 import { SocketDraw } from "./src/socket_draw.js";
 import { UIController } from "./src/ui_ctrl.js";
@@ -30,13 +30,15 @@ class Game {
     ui.AddComponent(new UIController(uiparams));
 
     const data = cells(150, 50, 3);
+    console.log(data);
 
     const redparams = {
       color: `255, 25, 77`,
       radius: 5,
-      opos: data.filter((d) => d.prob > 0.5)[0],
-      spos: data.filter((d) => d.prob < 0.5)[2],
+      opos: data.splice(randindex(data), 1)[0],
+      spos: data.splice(randindex(data), 1)[0],
     };
+
     const red = new Entity();
     this.entitymanager.Add("red", red);
     red.AddComponent(new OriginController(redparams));
@@ -54,8 +56,8 @@ class Game {
     const greenparams = {
       color: `21, 47, 36`,
       radius: 5,
-      opos: data.filter((d) => d.prob > 0.5)[2],
-      spos: data.filter((d) => d.prob < 0.5)[1],
+      opos: data.splice(randindex(data), 1)[0],
+      spos: data.splice(randindex(data), 1)[0],
     };
     const green = new Entity();
     this.entitymanager.Add("green", green);
@@ -74,8 +76,8 @@ class Game {
     const yellowparams = {
       color: `254, 204, 13`,
       radius: 5,
-      opos: data.filter((d) => d.prob > 0.5)[1],
-      spos: data.filter((d) => d.prob < 0.5)[0],
+      opos: data.splice(randindex(data), 1)[0],
+      spos: data.splice(randindex(data), 1)[0],
     };
     const yellow = new Entity();
     this.entitymanager.Add("yellow", yellow);
