@@ -21,12 +21,17 @@ export class Particles extends Component {
       return a + t * (b - a);
     });
     this.sizespl.AddPoint(0.0, 0.0);
+    this.sizespl.AddPoint(0.2, 0.75);
     this.sizespl.AddPoint(0.5, 3.0);
+    this.sizespl.AddPoint(0.8, 1.0);
     this.sizespl.AddPoint(1.0, 0.0);
     this.#SetParticles();
 
     this.owner.RegisterHandler("particles.spawn", (msg) =>
       this.OnParticlesSpawn(msg),
+    );
+    this.owner.RegisterHandler("dot.velocity", (msg) =>
+      this.OnDotVelocity(msg),
     );
   }
 
@@ -38,8 +43,8 @@ export class Particles extends Component {
 
       this.particles.push({
         position: {
-          x: this.params.spos.x + Math.cos(ang),
-          y: this.params.spos.y + Math.sin(ang),
+          x: 0,
+          y: 0,
         },
         size: 0,
         alpha: 1,
@@ -55,9 +60,19 @@ export class Particles extends Component {
   }
 
   OnParticlesSpawn(msg) {
+    this.particles.forEach((p, idx) => {
+      p.position.x = msg.pos.x;
+      p.position.y = msg.pos.y;
+    });
     this.active = msg.value;
   }
-
+  OnDotVelocity(msg) {
+    this.particles.forEach((p, idx) => {
+      p.position.x = msg.pos.x;
+      p.position.y = msg.pos.y;
+    });
+    this.active = msg.value;
+  }
   Update(dt, time) {
     if (this.active) {
       this.particles.forEach((p) => {

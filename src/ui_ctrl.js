@@ -18,40 +18,49 @@ export class UIController extends Component {
   InitComponent() {
     this.owner.RegisterHandler("dot.score", (msg) => this.OnDotScore(msg));
     this.owner.RegisterHandler("dot.bounce", (msg) => this.OnDotBounce(msg));
+    this.owner.RegisterHandler("dot.velocity", (msg) =>
+      this.OnDotVelocity(msg),
+    );
     this.owner.RegisterHandler("field.spawn", (msg) => this.OnFieldSpawn(msg));
-    this.data = { bounce: 0, score: 0, field: 0 };
-    this.s = document.querySelector("#svalue");
-    this.b = document.querySelector("#sbounce");
-    this.f = document.querySelector("#sfield");
+    this.data = { bounce: 0, score: 0, field: 0, lost: 0 };
   }
 
   OnDotScore(msg) {
     this.data.score += msg.value;
-    this.s.innerText = this.data.score;
   }
 
   OnDotBounce(msg) {
     this.data.bounce += msg.value;
-    this.b.innerText = this.data.bounce;
   }
-
+  OnDotVelocity(msg) {
+    this.data.lost += msg.value;
+  }
   OnFieldSpawn(msg) {
     this.data.field += msg.value;
-    this.f.innerText = this.data.field;
   }
-  /* Update(dt, time) {
+  Update(dt, time) {
     ctx.font = `25px "Major Mono Display"`;
     ctx.fillStyle = `rgb(0,0,0,.7)`;
-    const twidth = ctx.measureText("Bounce: 10");
-    ctx.fillText(
-      `bounce: ${this.data.bounce}`,
-      this.params.pos.x - twidth.width / 2,
-      this.params.pos.y + 100,
-    );
+    const twidth = ctx.measureText(`Bounce: 100`);
     ctx.fillText(
       `score: ${this.data.score}`,
       this.params.pos.x - twidth.width / 2,
-      this.params.pos.y + this.params.gap + 100,
+      this.params.pos.y - 100 + this.params.gap,
     );
-  } */
+    ctx.fillText(
+      `bounces: ${this.data.bounce}`,
+      this.params.pos.x - twidth.width / 2,
+      this.params.pos.y - 100 + this.params.gap * 2,
+    );
+    ctx.fillText(
+      `fields: ${this.data.field}`,
+      this.params.pos.x - twidth.width / 2,
+      this.params.pos.y - 100 + this.params.gap * 3,
+    );
+    ctx.fillText(
+      `lost: ${this.data.lost}`,
+      this.params.pos.x - twidth.width / 2,
+      this.params.pos.y - 100 + this.params.gap * 4,
+    );
+  }
 }

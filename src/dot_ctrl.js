@@ -34,7 +34,6 @@ export class DotController extends Component {
     this.SetPosition();
     this.owner.SetParam("d.position", this.position);
     this.owner.RegisterHandler("dot.collide", (msg) => this.OnCollide(msg));
-    //this.owner.RegisterHandler("dot.active", (msg) => this.OnDotActive(msg));
     this.owner.RegisterHandler("dot.score", (msg) => this.OnDotScore(msg));
   }
 
@@ -42,9 +41,7 @@ export class DotController extends Component {
     this.collide = true;
     this.force = { ...msg.force };
   }
-  /* OnDotActive(msg) {
-    this.active = msg.value;
-  } */
+
   OnDotScore(msg) {
     this.SetForce();
     this.SetVelocity();
@@ -83,11 +80,19 @@ export class DotController extends Component {
       if (
         Math.sqrt(
           this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y,
-        ) < 0.5
+        ) < 4.0
       ) {
-        this.owner.Broadcast({ topic: "dot.velocity", value: "stop" });
+        this.owner.Broadcast({
+          topic: "dot.velocity",
+          pos: this.position,
+          value: true,
+        });
+        this.owner.manager
+          .Get("ui")
+          .Broadcast({ topic: "dot.velocity", value: 1 });
+        this.active = false;
       }
-
+      //not sure if use these anymore
       this.owner.SetParam("d.position", this.position);
       this.owner.SetParam("d.velocity", this.velocity);
     }

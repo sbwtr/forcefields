@@ -27,6 +27,7 @@ export class SocketController extends Component {
       this.owner.Broadcast({
         topic: "particles.spawn",
         value: true,
+        pos: this.params.spos,
       });
 
       this.owner.manager.Get("ui").Broadcast({ topic: "dot.score", value: 10 });

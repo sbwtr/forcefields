@@ -13,10 +13,12 @@ export class DotDraw extends Component {
   }
   InitComponent() {
     this.owner.SetParam("d.radius", this.params.radius);
-    this.owner.RegisterHandler("dot.active", (msg) => this.OnDotActive(msg));
+    this.owner.RegisterHandler("dot.velocity", (msg) =>
+      this.OnDotVelocity(msg),
+    );
   }
-  OnDotActive(msg) {
-    this.active = msg.value;
+  OnDotVelocity(msg) {
+    this.active = !msg.value;
   }
   Update(dt, time) {
     if (this.active) {

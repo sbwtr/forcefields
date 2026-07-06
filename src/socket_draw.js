@@ -18,8 +18,8 @@ export class SocketDraw extends Component {
   }
   InitComponent() {
     this.sizespl = new LinearSpline((t, a, b) => a + t * (b - a));
-    this.sizespl.AddPoint(0.0, 50.0);
-    this.sizespl.AddPoint(0.25, 55.0);
+    this.sizespl.AddPoint(0.0, 10.0);
+    this.sizespl.AddPoint(0.25, 30.0);
     this.sizespl.AddPoint(0.5, 70.0);
     this.sizespl.AddPoint(0.75, 55);
     this.sizespl.AddPoint(1.0, 50.0);
