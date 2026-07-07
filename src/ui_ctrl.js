@@ -34,10 +34,28 @@ export class UIController extends Component {
   }
   OnDotVelocity(msg) {
     this.data.lost += msg.value;
+    if (this.data.lost > 2) {
+      this.PauseMenu();
+    }
   }
   OnFieldSpawn(msg) {
     this.data.field += msg.value;
   }
+
+  PauseMenu() {
+    document.querySelector("canvas").style.visibility = "hidden";
+    document.querySelector(".back").style.visibility = "visible";
+    document.querySelector(".score").innerText = `${this.data.score}`;
+    document.querySelector(".bounce").innerText = `${this.data.bounce}`;
+    document.querySelector(".field").innerText = `${this.data.field}`;
+    const total = this.data.score - this.data.bounce - this.data.field;
+    document.querySelector(".total").innerText = `${total}`;
+    document.querySelector(".menu-btn").addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.reload();
+    });
+  }
+
   Update(dt, time) {
     ctx.font = `25px "Major Mono Display"`;
     ctx.fillStyle = `rgb(0,0,0,.7)`;
@@ -57,10 +75,10 @@ export class UIController extends Component {
       this.params.pos.x - twidth.width / 2,
       this.params.pos.y - 100 + this.params.gap * 3,
     );
-    ctx.fillText(
+    /* ctx.fillText(
       `lost: ${this.data.lost}`,
       this.params.pos.x - twidth.width / 2,
       this.params.pos.y - 100 + this.params.gap * 4,
-    );
+    ); */
   }
 }

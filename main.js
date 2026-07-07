@@ -30,7 +30,6 @@ class Game {
     ui.AddComponent(new UIController(uiparams));
 
     const data = cells(150, 50, 3);
-    console.log(data);
 
     const redparams = {
       color: `255, 25, 77`,

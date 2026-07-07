@@ -80,7 +80,7 @@ export class DotController extends Component {
       if (
         Math.sqrt(
           this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y,
-        ) < 3.0
+        ) < 15.0
       ) {
         this.owner.Broadcast({
           topic: "dot.velocity",
