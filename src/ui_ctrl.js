@@ -43,7 +43,7 @@ export class UIController extends Component {
   }
 
   PauseMenu() {
-    document.querySelector("canvas").style.visibility = "hidden";
+    // document.querySelector("canvas").style.visibility = "hidden";
     document.querySelector(".back").style.visibility = "visible";
     document.querySelector(".score").innerText = `${this.data.score}`;
     document.querySelector(".bounce").innerText = `${this.data.bounce}`;
